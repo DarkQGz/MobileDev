@@ -1,34 +1,55 @@
-import { StyleSheet, Text, View } from "react-native";
+// App.tsx
+import React from "react";
+import { View, Text, FlatList, StyleSheet, ScrollView } from "react-native";
+import babyData from "./data/babydata";
 
-export default function Page() {
+export default function App() {
   return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>Hello World</Text>
-        <Text style={styles.subtitle}>This is the first page of your app.</Text>
-      </View>
-    </View>
+    <ScrollView style={styles.container}>
+      {babyData.map((cat) => (
+        <View key={cat.cid} style={styles.category}>
+          <Text style={styles.categoryTitle}>{cat.cname}</Text>
+
+          {cat.subcat.map((sub) => (
+            <View key={sub.sid} style={styles.subCategory}>
+              <Text style={styles.subTitle}>• {sub.sname}</Text>
+
+              {sub.item.map((item) => (
+                <Text key={item.iid} style={styles.item}>
+                  - {item.iname}
+                </Text>
+              ))}
+            </View>
+          ))}
+        </View>
+      ))}
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: "center",
-    padding: 24,
+    marginTop: 40,
+    padding: 16,
   },
-  main: {
-    flex: 1,
-    justifyContent: "center",
-    maxWidth: 960,
-    marginHorizontal: "auto",
+  category: {
+    marginBottom: 24,
   },
-  title: {
-    fontSize: 64,
+  categoryTitle: {
+    fontSize: 22,
     fontWeight: "bold",
+    marginBottom: 8,
   },
-  subtitle: {
-    fontSize: 36,
-    color: "#38434D",
+  subCategory: {
+    marginLeft: 12,
+    marginBottom: 8,
+  },
+  subTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+  },
+  item: {
+    fontSize: 16,
+    marginLeft: 12,
   },
 });
