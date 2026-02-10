@@ -2,7 +2,7 @@ const babyData = [
   {
     cid: 1,
     cname: "Амьтан",
-    cicon: "animal_icon",
+    cicon: "earlybirds",
     csound: "\\sound\\cat\\1.mp3",
     subcat: [
       {
@@ -142,7 +142,7 @@ const babyData = [
   {
     cid: 2,
     cname: "Жимс, хүнс",
-    cicon: "food_icon",
+    cicon: "lemon",
     csound: "\\sound\\cat\\2.mp3",
     subcat: [
       {
@@ -282,7 +282,7 @@ const babyData = [
   {
     cid: 3,
     cname: "Тээврийн хэрэгсэл",
-    cicon: "transport_icon",
+    cicon: "caravan",
     csound: "\\sound\\cat\\3.mp3",
     subcat: [
       {
