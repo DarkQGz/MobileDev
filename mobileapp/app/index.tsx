@@ -1,55 +1,62 @@
-// App.tsx
 import React from "react";
-import { View, Text, FlatList, StyleSheet, ScrollView } from "react-native";
+import { View, Text, FlatList, StyleSheet } from "react-native";
 import babyData from "./data/babydata";
 
-export default function App() {
+export default function Index() {
   return (
-    <ScrollView style={styles.container}>
-      {babyData.map((cat) => (
-        <View key={cat.cid} style={styles.category}>
-          <Text style={styles.categoryTitle}>{cat.cname}</Text>
+    <View style={styles.container}>
+      <FlatList
+        data={babyData}
+        horizontal
+        keyExtractor={(item) => item.cid.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.card}>
+            <Text style={styles.title}>{item.cname}</Text>
 
-          {cat.subcat.map((sub) => (
-            <View key={sub.sid} style={styles.subCategory}>
-              <Text style={styles.subTitle}>• {sub.sname}</Text>
-
-              {sub.item.map((item) => (
-                <Text key={item.iid} style={styles.item}>
-                  - {item.iname}
-                </Text>
-              ))}
-            </View>
-          ))}
-        </View>
-      ))}
-    </ScrollView>
+            {item.subcat.map((sub) => (
+              <View key={sub.sid} style={styles.row}>
+                <Text style={styles.sub}>{sub.sname}</Text>
+                <Text style={styles.count}>{sub.item.length}</Text>
+              </View>
+            ))}
+          </View>
+        )}
+      />
+    </View>
   );
 }
 
+
 const styles = StyleSheet.create({
   container: {
-    marginTop: 40,
-    padding: 16,
+    marginTop: 50,
+    paddingLeft: 12,
   },
-  category: {
-    marginBottom: 24,
+  card: {
+    backgroundColor: "#f2f2f2", // light gray
+    borderRadius: 12,
+    padding: 12,
+    marginRight: 12,
+    minWidth: 220,
   },
-  categoryTitle: {
-    fontSize: 22,
+  title: {
+    fontSize: 18,
     fontWeight: "bold",
     marginBottom: 8,
+    textAlign: "center",
   },
-  subCategory: {
-    marginLeft: 12,
-    marginBottom: 8,
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingVertical: 6,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ddd",
   },
-  subTitle: {
-    fontSize: 18,
+  sub: {
+    fontSize: 14,
+  },
+  count: {
+    fontSize: 14,
     fontWeight: "600",
-  },
-  item: {
-    fontSize: 16,
-    marginLeft: 12,
   },
 });
